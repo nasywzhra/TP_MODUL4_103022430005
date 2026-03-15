@@ -11,6 +11,10 @@ class Program
         string kel = Console.ReadLine();
 
         Console.WriteLine("Kode Pos: " + kp.GetKodePos(kel));
+
+        DoorMachine pintu = new DoorMachine();
+        pintu.BukaPintu();
+        pintu.KunciPintu();
     }
 }
 
@@ -40,6 +44,31 @@ class KodePos
         else
         {
             return "Kode pos tidak ditemukan";
+        }
+    }
+}
+
+class DoorMachine
+{
+    enum State { TERKUNCI, TERBUKA }
+
+    private State currentState = State.TERKUNCI;
+
+    public void BukaPintu()
+    {
+        if (currentState == State.TERKUNCI)
+        {
+            currentState = State.TERBUKA;
+            Console.WriteLine("Pintu tidak terkunci");
+        }
+    }
+
+    public void KunciPintu()
+    {
+        if (currentState == State.TERBUKA)
+        {
+            currentState = State.TERKUNCI;
+            Console.WriteLine("Pintu terkunci");
         }
     }
 }
